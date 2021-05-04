@@ -18,10 +18,10 @@ CREATE DATABASE new_database;
 CREATE TABLE public.delito (
 	id_delito serial NOT NULL,
 	articulo varchar(10),
-	h_d_c varchar(2) NOT NULL,
-	hecho varchar(2) NOT NULL,
+	h_d_c char(2) NOT NULL,
+	hecho char(2) NOT NULL,
 	anio_hecho integer NOT NULL,
-	conexo varchar(2) NOT NULL,
+	conexo char(2) NOT NULL,
 	delito_especifico_calsificacion_delito varchar(40),
 	municipio_ubicacion varchar(20),
 	id_proceso_proceso integer,
@@ -64,10 +64,10 @@ ALTER TABLE public.ubicacion OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.resultado CASCADE;
 CREATE TABLE public.resultado (
 	id_resultado serial NOT NULL,
-	condena varchar(2) NOT NULL,
-	captura varchar(2) NOT NULL,
-	a_o_i varchar(2) NOT NULL,
-	ruptura varchar(2) NOT NULL,
+	condena char(2) NOT NULL,
+	captura char(2) NOT NULL,
+	a_o_i char(2) NOT NULL,
+	ruptura char(2) NOT NULL,
 	CONSTRAINT sentencia_pk PRIMARY KEY (id_resultado)
 
 );
@@ -82,8 +82,8 @@ CREATE TABLE public.proceso (
 	estado_actividad varchar(10) NOT NULL,
 	etapa varchar(20) NOT NULL,
 	seccion varchar(20) NOT NULL,
-	imputacion varchar(2) NOT NULL,
-	acusacion varchar(2) NOT NULL,
+	imputacion char(2) NOT NULL,
+	acusacion char(2) NOT NULL,
 	anio_entrada integer NOT NULL,
 	anio_denuncia integer NOT NULL,
 	id_resultado_resultado integer,
