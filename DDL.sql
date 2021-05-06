@@ -35,7 +35,7 @@ ALTER TABLE public.delito OWNER TO postgres;
 
 -- object: public."Grupo_victimas" | type: TABLE --
 -- DROP TABLE IF EXISTS public."Grupo_victimas" CASCADE;
-CREATE TABLE public."Grupo_victimas" (
+CREATE TABLE public.Grupo_victimas (
 	id_grupo serial NOT NULL,
 	numero_victimas integer NOT NULL,
 	edad varchar(20),
@@ -45,7 +45,7 @@ CREATE TABLE public."Grupo_victimas" (
 
 );
 -- ddl-end --
-ALTER TABLE public."Grupo_victimas" OWNER TO postgres;
+ALTER TABLE public.Grupo_victimas OWNER TO postgres;
 -- ddl-end --
 
 -- object: public.ubicacion | type: TABLE --
