@@ -1,14 +1,23 @@
 import psycopg2
 
-try:
-    conexion = psycopg2.connect(user = "postgres",
-                                password = "1234",
-                                database = "covid19",
-                                host = "localhost",
-                                port = "5432")
+class Connection:
+    
+    def __init__(self):
+        self.connection = None
+    
+    def openConnection(self):
+        try:
+            self.connection = psycopg2.connect(user="postgres",
+                                               password="0000",
+                                               database="conteo_victimas",
+                                               host="localhost", 
+                                               port="5432")
+        except Exception as e:
+            print (e)
 
+    def closeConnection(self):
+        self.connection.close()
 
-    print("Conexion existosa")
 
     grupo_victimas = """ select * from Grupo_victimas """
     calsificacion_delito = """ select * from clasificacion_delito """
@@ -16,13 +25,3 @@ try:
     proceso = """ select * from proceso """
     resultado = """ select * from resultado """
     ubicacion = """ select * from ubicacion """
-
-
-
-except Exception as e:
-    print (e)
-
-finally:
-    cursor.close()
-    conexion.close()
-    print ("Conexion cerrada")
