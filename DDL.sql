@@ -118,7 +118,7 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- object: "Grupo_victimas_fk" | type: CONSTRAINT --
 -- ALTER TABLE public.delito DROP CONSTRAINT IF EXISTS "Grupo_victimas_fk" CASCADE;
-ALTER TABLE public.delito ADD CONSTRAINT Grupo_victimas_fk FOREIGN KEY (id_grupo_Grupo_victimas)
+ALTER TABLE public.delito ADD CONSTRAINT Grupo_victimas_fk FOREIGN KEY ("id_grupo_Grupo_victimas")
 REFERENCES public.Grupo_victimas (id_grupo) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
