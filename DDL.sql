@@ -9,7 +9,7 @@
 -- 
 -- object: new_database | type: DATABASE --
 -- DROP DATABASE IF EXISTS new_database;
-CREATE DATABASE new_database;
+-- CREATE DATABASE new_database;
 -- ddl-end --
 
 
@@ -36,7 +36,7 @@ ALTER TABLE public.delito OWNER TO postgres;
 
 -- object: public."Grupo_victimas" | type: TABLE --
 -- DROP TABLE IF EXISTS public."Grupo_victimas" CASCADE;
-CREATE TABLE public."Grupo_victimas" (
+CREATE TABLE public.Grupo_victimas (
 	id_grupo serial NOT NULL,
 	numero_victimas integer NOT NULL,
 	edad varchar(40),
@@ -46,7 +46,7 @@ CREATE TABLE public."Grupo_victimas" (
 
 );
 -- ddl-end --
-ALTER TABLE public."Grupo_victimas" OWNER TO postgres;
+ALTER TABLE public.Grupo_victimas OWNER TO postgres;
 -- ddl-end --
 
 -- object: public.resultado | type: TABLE --
@@ -118,8 +118,8 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- object: "Grupo_victimas_fk" | type: CONSTRAINT --
 -- ALTER TABLE public.delito DROP CONSTRAINT IF EXISTS "Grupo_victimas_fk" CASCADE;
-ALTER TABLE public.delito ADD CONSTRAINT "Grupo_victimas_fk" FOREIGN KEY ("id_grupo_Grupo_victimas")
-REFERENCES public."Grupo_victimas" (id_grupo) MATCH FULL
+ALTER TABLE public.delito ADD CONSTRAINT Grupo_victimas_fk FOREIGN KEY ("id_grupo_Grupo_victimas")
+REFERENCES public.Grupo_victimas (id_grupo) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
