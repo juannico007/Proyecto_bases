@@ -18,8 +18,6 @@ copy resultado(condena, captura, a_o_i, ruptura)
 	from 'C:\CSVsql\Proyecto\Resultado.csv'
 	with delimiter ',' csv header;
 
--- Ubicacion
-
 -- procesos
 copy proceso(estado_actividad,etapa,seccion,imputacion,acusacion,anio_entrada,anio_denuncia,id_resultado_resultado)
 	from 'C:\CSVsql\Proyecto\Proceso1.csv'
@@ -34,22 +32,22 @@ copy proceso(estado_actividad,etapa,seccion,imputacion,acusacion,anio_entrada,an
 	with delimiter ';' csv header;
 	
 -- clasificacion delito
-copy calsificacion_delito
+copy calsificacion_delito(delito_especifico, grupo)
 	from 'C:\CSVsql\Proyecto\clasificacion_delito.csv'
 	with delimiter ';' csv header;
 	
 -- DELITO
 copy delito(h_d_c,hecho,anio_hecho,conexo,municipio,departamento,id_proceso_proceso,"id_grupo_Grupo_victimas",delito_especifico_calsificacion_delito,articulo)
     from 'C:\CSVsql\Proyecto\Delito1.csv'
-    with delimiter ',' csv header;
+    with delimiter ';' csv header;
 	
 copy delito(h_d_c,hecho,anio_hecho,conexo,municipio,departamento,id_proceso_proceso,"id_grupo_Grupo_victimas",delito_especifico_calsificacion_delito,articulo)
     from 'C:\CSVsql\Proyecto\Delito2.csv'
-    with delimiter ',' csv header;
+    with delimiter ';' csv header;
 
 copy delito(h_d_c,hecho,anio_hecho,conexo,municipio,departamento,id_proceso_proceso,"id_grupo_Grupo_victimas",delito_especifico_calsificacion_delito,articulo)
     from 'C:\CSVsql\Proyecto\Delito3.csv'
-    with delimiter ',' csv header;
+    with delimiter ';' csv header;
 	
 	
 alter table Grupo_victimas alter column pais_de_nacimiento type varchar(60);
@@ -82,7 +80,10 @@ UPDATE proceso SET id_proceso=nextval('proceso_id_proceso_seq');
 DELETE FROM calsificacion_delito;
 alter table calsificacion_delito alter column delito_especifico type varchar(150);
 
-
 alter table delito alter column delito_especifico_calsificacion_delito type varchar(150);
+alter table delito alter column articulo type varchar(200);
 
-DELETE FROM delito
+ALTER SEQUENCE delito_id_delito_seq RESTART WITH 1;
+UPDATE delito SET id_delito=nextval('delito_id_delito_seq');
+
+DELETE FROM delito;
