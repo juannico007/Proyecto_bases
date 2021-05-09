@@ -8,8 +8,8 @@ class Connection:
     def openConnection(self):
         try:
             self.connection = psycopg2.connect(user="postgres",
-                                               password="0000",
-                                               database="conteo_victimas",
+                                               password="1234",
+                                               database="conteovictimas",
                                                host="localhost", 
                                                port="5432")
         except Exception as e:
@@ -19,9 +19,9 @@ class Connection:
         self.connection.close()
 
 
-    grupo_victimas = """ select * from Grupo_victimas """
-    calsificacion_delito = """ select * from clasificacion_delito """
-    delito = """ select * from delito """
-    proceso = """ select * from proceso """
-    resultado = """ select * from resultado """
-    ubicacion = """ select * from ubicacion """
+#    grupo_victimas = """ select * from Grupo_victimas """
+#    calsificacion_delito = """ select * from clasificacion_delito """
+#    delito = """ select * from delito """
+#    proceso = """ select * from proceso """
+#    resultado = """ select * from resultado """
+#    ubicacion = """ select * from ubicacion """
