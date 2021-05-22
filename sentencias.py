@@ -37,3 +37,5 @@ def analisis4():
                from ((delito de inner join grupo_victimas gv on gv.id_grupo = de."id_grupo_Grupo_victimas") inner join proceso pr on pr.id_proceso = de.id_proceso_proceso) inner join resultado re on re.id_resultado = pr.id_resultado_resultado
                group by gv.genero, re.condena 
                order by numero_casos desc"""
+
+               # select gv.genero, re.condena, count(re.condena) as numero_casos
