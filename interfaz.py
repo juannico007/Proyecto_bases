@@ -27,13 +27,13 @@ df = pd.DataFrame(query, columns=["departamento", "numero_casos"])
 
 #graficas
 
-figBaranalisis1 = px.bar(df.head(20), x="departamento", y="numero_casos", title = "Barras Verticales Analisis 1")
+figBaranalisis1 = px.bar(df.head(20), x="departamento", y="numero_casos", title = "Barras Verticales")
 
-figBarHanalisis1 = px.bar(df.head(25), y="departamento", x="numero_casos", orientation = 'h', title = "Barras Horizontales Analisis 1")
+figBarHanalisis1 = px.bar(df.head(20), y="departamento", x="numero_casos", orientation = 'h', title = "Barras Horizontales")
 
-figpieanalisis1 = px.pie(df.head(25), values = "numero_casos", names = "departamento", title = "Pie Analisis 1")
+figpieanalisis1 = px.pie(df.head(20), values = "numero_casos", names = "departamento", title = "Pie")
 
-figlineanalisis1 = px.line(df, x="departamento", y="numero_casos", title='Line Analisis 1')
+figlineanalisis1 = px.line(df.head(20), x="departamento", y="numero_casos", title='Lineas')
 
 locs = []
 y = []
@@ -68,15 +68,15 @@ query = pd.read_sql_query(sql.analisis2(), con.connection)
 con.closeConnection()
 df = pd.DataFrame(query, columns=["grupo", "numero_casos"])
 
-#graficas 
+#graficas
 
-figBaranalisis2 = px.bar(df.head(20), x="grupo", y="numero_casos", title = "Barras Verticales Analisis 2")
+figBaranalisis2 = px.bar(df.head(20), x="grupo", y="numero_casos", title = "Barras Verticales")
 
-figBarHanalisis2 = px.bar(df.head(25), y="grupo", x="numero_casos", orientation = 'h', title = "Barras Horizontales Analisis 2")
+figBarHanalisis2 = px.bar(df.head(20), y="grupo", x="numero_casos", orientation = 'h', title = "Barras Horizontales")
 
-figpieanalisis2 = px.pie(df.head(25), values = "numero_casos", names = "grupo", title = "Pie Analisis 2")
+figpieanalisis2 = px.pie(df.head(20), values = "numero_casos", names = "grupo", title = "Pie")
 
-figlineanalisis2 = px.line(df, x="grupo", y="numero_casos", title='Line Analisis 2')
+figlineanalisis2 = px.line(df.head(20), x="grupo", y="numero_casos", title='Lineas')
 
 #analisis 3
 con = Connection()
@@ -85,15 +85,15 @@ query = pd.read_sql_query(sql.analisis3(), con.connection)
 con.closeConnection()
 df = pd.DataFrame(query, columns=["etapa", "numero_casos"])
 
-#graficas 
+#graficas
 
-figBaranalisis3 = px.bar(df.head(20), x="etapa", y="numero_casos", title = "Barras Verticales Analisis 3")
+figBaranalisis3 = px.bar(df.head(20), x="etapa", y="numero_casos", title = "Barras Verticales")
 
-figBarHanalisis3 = px.bar(df.head(25), y="etapa", x="numero_casos", orientation = 'h', title = "Barras Horizontales Analisis 3")
+figBarHanalisis3 = px.bar(df.head(20), y="etapa", x="numero_casos", orientation = 'h', title = "Barras Horizontales")
 
-figpieanalisis3 = px.pie(df.head(25), values = "numero_casos", names = "etapa", title = "Pie Analisis 3")
+figpieanalisis3 = px.pie(df.head(20), values = "numero_casos", names = "etapa", title = "Pie")
 
-figlineanalisis3 = px.line(df, x="etapa", y="numero_casos", title='Line Analisis 3')
+figlineanalisis3 = px.line(df.head(20), x="etapa", y="numero_casos", title='Lineas')
 
 #analisis 4
 con = Connection()
@@ -102,23 +102,35 @@ query = pd.read_sql_query(sql.analisis4(), con.connection)
 con.closeConnection()
 df = pd.DataFrame(query, columns=["genero" , "condena", "numero_casos"])
 
-#graficas 
+#graficas
 
-figBaranalisis4 = px.bar(df.head(20), x= "genero", y="numero_casos", color = "condena", title = "Barras Verticales Analisis 4")
+figBaranalisis4 = px.bar(df.head(20), x= "genero", y="numero_casos", color = "condena", title = "Barras Verticales")
 
-figBarHanalisis4 = px.bar(df.head(25), y= "genero", x="numero_casos", color = "condena", orientation = 'h', title = "Barras Horizontales Analisis 4")
+figBarHanalisis4 = px.bar(df.head(20), y= "genero", x="numero_casos", color = "condena", orientation = 'h', title = "Barras Horizontales")
 
-figpieanalisis4 = px.pie(df.head(25), values = "numero_casos", names = "genero", title = "Pie Analisis 4")
+figlineanalisis4 = px.line(df.head(20), x= "genero", y="numero_casos", title='Lineas')
 
-figlineanalisis4 = px.line(df, x= "genero", y="numero_casos", title='Line Analisis 4')
+con = Connection()
+con.openConnection()
+query = pd.read_sql_query(sql.analisis4_m(), con.connection)
+con.closeConnection()
+df = pd.DataFrame(query, columns=["condena", "numero_casos"])
 
+figpieanalisis4_m = px.pie(df, values = "numero_casos", names = "condena", title = "Casos terminados en condena - hombres")
 
+con = Connection()
+con.openConnection()
+query = pd.read_sql_query(sql.analisis4_f(), con.connection)
+con.closeConnection()
+df = pd.DataFrame(query, columns=["condena", "numero_casos"])
+
+figpieanalisis4_f = px.pie(df, values = "numero_casos", names = "condena", title = "Casos terminados en condena - mujeres")
 
 # Layout
 app.layout = html.Div(children=[
     html.H1(children='Analisis conteo de victimas'),
 
-    html.H2(children = 'Analisis1'),
+    html.H2(children = 'Casos reportados por departamento'),
     dcc.Graph(
         id='Barras Verticales 1',
         figure=figBaranalisis1
@@ -132,15 +144,11 @@ app.layout = html.Div(children=[
         figure=figpieanalisis1
     ),
     dcc.Graph(
-        id='Lineas 1',
-        figure=figlineanalisis1
-    ),
-    dcc.Graph(
-        id='Mapa 1',
+        id='Mapa',
         figure=figmapanalisis1
     ),
-   
-    html.H3(children = 'Analisis2'),
+
+    html.H3(children = 'Recurrencia de delitos'),
     dcc.Graph(
         id='Barras Verticales 2',
         figure=figBaranalisis2
@@ -153,12 +161,8 @@ app.layout = html.Div(children=[
         id='Pie 2',
         figure=figpieanalisis2
     ),
-    dcc.Graph(
-        id='Lineas 2',
-        figure=figlineanalisis2
-    ),
-    
-    html.H4(children = 'Analisis3'),
+
+    html.H4(children = 'Estado de los procesos'),
     dcc.Graph(
         id='Barras Verticales 3',
         figure=figBaranalisis3
@@ -171,12 +175,8 @@ app.layout = html.Div(children=[
         id='Pie 3',
         figure=figpieanalisis3
     ),
-    dcc.Graph(
-        id='Lineas 3',
-        figure=figlineanalisis3
-    ),
 
-    html.H5(children = 'Analisis4'),
+    html.H5(children = 'Casos reportados por genero de las victimas'),
     dcc.Graph(
         id='Barras Verticales 4',
         figure=figBaranalisis4
@@ -186,13 +186,13 @@ app.layout = html.Div(children=[
         figure=figBarHanalisis4
     ),
     dcc.Graph(
-        id='Pie 4',
-        figure=figpieanalisis4
+        id='Pie 4 m',
+        figure=figpieanalisis4_m
     ),
     dcc.Graph(
-        id='Lineas 4',
-        figure=figlineanalisis4
-    )
+        id='Pie 4 f',
+        figure=figpieanalisis4_f
+    ),
 ])
 
 if __name__ == '__main__':
